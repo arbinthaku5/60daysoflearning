@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Day 3 - DOM & Events</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .box {
+      border: 1px solid black;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    button {
+      margin: 5px;
+      padding: 5px 10px;
+    }
+
+    #taskList li {
+      margin-bottom: 5px;
+    }
+
+    #taskList button {
+      background-color: red;
+      color: white;
+      border: none;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="title">DOM & Events Practice</h1>
+
+  <!-- Section 1: Change Text -->
+  <h2>1. Change Text</h2>
+  <p id="text">Original Text</p>
+  <button id="changeTextBtn">Change Text</button>
+
+  <!-- Section 2: Add/Remove Box -->
+  <h2>2. Add / Remove Element</h2>
+  <button id="addBox">Add Box</button>
+  <button id="removeBox">Remove Box</button>
+  <div id="boxContainer"></div>
+
+  <!-- Section 3: Todo List -->
+  <h2>3. Todo List</h2>
+  <input type="text" id="taskInput" placeholder="Enter a task" />
+  <button id="addTaskBtn">Add Task</button>
+  <ul id="taskList"></ul>
+
+  <script>
+    // Change Text
+    document.getElementById("changeTextBtn").addEventListener("click", () => {
+      document.getElementById("text").textContent = "Text Changed!";
+    });
+
+    // Add / Remove Box
+    const addBoxBtn = document.getElementById("addBox");
+    const removeBoxBtn = document.getElementById("removeBox");
+    const boxContainer = document.getElementById("boxContainer");
+    let box;
+
+    addBoxBtn.addEventListener("click", () => {
+      box = document.createElement("div");
+      box.className = "box";
+      box.textContent = "I'm a new box!";
+      boxContainer.appendChild(box);
+    });
+
+    removeBoxBtn.addEventListener("click", () => {
+      if (box) box.remove();
+    });
+
+    // Todo List
+    const taskInput = document.getElementById("taskInput");
+    const addTaskBtn = document.getElementById("addTaskBtn");
+    const taskList = document.getElementById("taskList");
+
+    addTaskBtn.addEventListener("click", () => {
+      const task = taskInput.value.trim();
+      if (task === "") {
+        alert("Task cannot be empty!");
+        return;
+      }
+
+      const li = document.createElement("li");
+      li.textContent = task;
+
+      const delBtn = document.createElement("button");
+      delBtn.textContent = "❌";
+      delBtn.addEventListener("click", () => li.remove());
+
+      li.appendChild(delBtn);
+      taskList.appendChild(li);
+      taskInput.value = "";
+    });
+  </script>
+</body>
+</html>
