@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Day 4 - Advanced DOM & Events</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .task-done {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    .error {
+      color: red;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li {
+      margin: 5px 0;
+      cursor: pointer;
+    }
+
+    input, button {
+      padding: 5px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Advanced DOM & Event Handling</h1>
+
+  <!-- 1. Form with Validation -->
+  <h2>1. Form Validation</h2>
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Email" required /><br />
+    <input type="password" id="password" placeholder="Password" required /><br />
+    <button type="submit">Login</button>
+    <p id="formError" class="error"></p>
+  </form>
+
+  <hr />
+
+  <!-- 2. Keyboard & Event Delegation Todo -->
+  <h2>2. Todo List (Enter Key & Event Delegation)</h2>
+  <input type="text" id="todoInput" placeholder="Type and press Enter" />
+  <ul id="todoList"></ul>
+
+  <script>
+    // === Form Submit with Validation ===
+    const loginForm = document.getElementById("loginForm");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const formError = document.getElementById("formError");
+
+    loginForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const emailVal = email.value.trim();
+      const passVal = password.value.trim();
+
+      if (!emailVal.includes("@")) {
+        formError.textContent = "Invalid email address!";
+        return;
+      }
+
+      if (passVal.length < 6) {
+        formError.textContent = "Password must be at least 6 characters.";
+        return;
+      }
+
+      formError.textContent = "";
+      alert("Login successful!");
+      loginForm.reset();
+    });
+
+    // === Todo List with Keyboard Event + Event Delegation ===
+    const todoInput = document.getElementById("todoInput");
+    const todoList = document.getElementById("todoList");
+
+    todoInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        const task = todoInput.value.trim();
+        if (task !== "") {
+          const li = document.createElement("li");
+          li.textContent = task;
+          todoList.appendChild(li);
+          todoInput.value = "";
+        }
+      }
+    });
+
+    // Event Delegation to handle toggle on list items
+    todoList.addEventListener("click", function (e) {
+      if (e.target.tagName === "LI") {
+        e.target.classList.toggle("task-done");
+      }
+    });
+  </script>
+</body>
+</html>
