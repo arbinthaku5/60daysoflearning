@@ -1,3 +1,4 @@
+//file system 
 const fs = require('fs');
 
 //write to file
@@ -12,7 +13,15 @@ fs.writeFile('example.txt', 'This is some sample text.', (err) => {
   });
 });
 
+//append to a file ir add haha
 fs.appendFile('output.txt', '\nMore content here...', (err) => {
   if (err) throw err;
   console.log('Appended content');
 });
+
+//delete a file
+fs.unlink('output.txt', (err) => {
+  if (err) throw err;
+  console.log('File deleted');
+});
+//file system ends here
