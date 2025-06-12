@@ -25,3 +25,16 @@ fs.unlink('output.txt', (err) => {
   console.log('File deleted');
 });
 //file system ends here
+
+
+
+const EventEmitter = require('events'); // 1. Import
+const emitter = new EventEmitter();     // 2. Create an instance
+
+// 3. Subscribe to an event
+emitter.on('greet', () => {
+  console.log('Hello! The greet event was fired.');
+});
+
+// 4. Emit the event
+emitter.emit('greet');
