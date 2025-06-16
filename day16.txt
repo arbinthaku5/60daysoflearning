@@ -1,0 +1,5 @@
+- Installed MongoDB locally
+
+- Learned the difference between local and cloud (MongoDB Atlas)
+
+- Configured access via mongosh
