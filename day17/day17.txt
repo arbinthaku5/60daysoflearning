@@ -1,0 +1,3 @@
+Practiced full CRUD with MongoDB!
+
+- inserted, queried, updated and deleted documents using mongo shell and MongoDB compass.
