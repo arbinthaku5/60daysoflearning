@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JSON Practice</title>
+  </head>
+  <body>
+    <h2>Open Console to See Output</h2>
+    <script>
+      const user = {
+        name: "Sita",
+        age: 22,
+        interests: ["coding", "reading", "traveling"],
+        address: {
+          city: "Bhaktapur",
+          country: "Nepal"
+        }
+      };
+
+      const jsonString = JSON.stringify(user);
+      console.log("JSON String:", jsonString);
+
+      localStorage.setItem("user", jsonString);
+
+      const retrievedData = localStorage.getItem("user");
+      const parsedUser = JSON.parse(retrievedData);
+
+      console.log("Parsed Object:", parsedUser);
+      console.log("Name:", parsedUser.name);
+      console.log("City:", parsedUser.address.city);
+    </script>
+  </body>
+</html>
