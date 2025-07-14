@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JS Test</title>
+</head>
+<body>
+  <h2>Open Console to See Output</h2>
+  <script>
+    // Paste your JS code here
+    const formatStudent = (name) => `Welcome, ${name}!`;
+
+    function admitStudent(name, callback) {
+      console.log("Processing admission...");
+      callback(name);
+    }
+
+    const saveToDatabase = (student) => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(`Student ${student} saved to database`);
+        }, 1000);
+      });
+    };
+
+    async function handleAdmission(name) {
+      const message = formatStudent(name);
+      admitStudent(name, (n) => console.log(message));
+      const dbResponse = await saveToDatabase(name);
+      console.log(dbResponse);
+    }
+
+    handleAdmission("Sita");
+  </script>
+</body>
+</html>
