@@ -1,4 +1,3 @@
-
 const rawStudents = [
   ["Sita", "Rita"],
   ["Gita", ["Sita", "Hari"]],
