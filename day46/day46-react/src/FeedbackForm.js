@@ -1,25 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function FeedbackForm() {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [feedbackList, setFeedbackList] = useState([]);
+
+  // Load saved feedback on mount
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("feedback")) || [];
+    setFeedbackList(saved);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!name.trim() || !comment.trim()) {
       setError("All fields are required");
+      setSuccess("");
       return;
     }
 
-    setError("");
-    console.log("Form submitted:");
-    console.log("Name:", name);
-    console.log("Comment:", comment);
+    const newFeedback = { name, comment };
+    const updatedList = [...feedbackList, newFeedback];
 
+    // Save to localStorage
+    localStorage.setItem("feedback", JSON.stringify(updatedList));
+    setFeedbackList(updatedList);
+
+    // Clear form and show success
     setName("");
     setComment("");
+    setError("");
+    setSuccess("Feedback submitted and saved!");
   };
 
   return (
@@ -27,6 +41,7 @@ function FeedbackForm() {
       <h2>Feedback Form</h2>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
+      {success && <p style={{ color: "green" }}>{success}</p>}
 
       <form onSubmit={handleSubmit}>
         <div>
@@ -53,6 +68,20 @@ function FeedbackForm() {
           Submit
         </button>
       </form>
+
+      <hr />
+      <h3>Previous Feedback</h3>
+      {feedbackList.length === 0 ? (
+        <p>No feedback submitted yet.</p>
+      ) : (
+        <ul>
+          {feedbackList.map((fb, idx) => (
+            <li key={idx}>
+              <strong>{fb.name}</strong>: {fb.comment}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
