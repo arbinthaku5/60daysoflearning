@@ -1,0 +1,118 @@
+/* Root Light Theme */
+:root {
+  --bg-gradient: linear-gradient(to right, #667eea, #764ba2);
+  --card-bg: #fff;
+  --text-color: #333;
+  --subtext-color: #777;
+  --bio-color: #444;
+  --link-color: #764ba2;
+  --link-hover: #333;
+}
+
+/* Dark Theme Variables */
+body.dark {
+  --bg-gradient: linear-gradient(to right, #1a1a1a, #333);
+  --card-bg: #1e1e1e;
+  --text-color: #eee;
+  --subtext-color: #aaa;
+  --bio-color: #ccc;
+  --link-color: #a78bfa;
+  --link-hover: #fff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--bg-gradient);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Theme Toggle Button */
+#theme-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+#theme-toggle:hover {
+  transform: scale(1.2);
+}
+
+.card {
+  background-color: var(--card-bg);
+  width: 90%;
+  max-width: 350px;
+  padding: 2rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.card-name {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text-color);
+}
+
+.card-title {
+  color: var(--subtext-color);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card-bio {
+  font-size: 0.95rem;
+  color: var(--bio-color);
+  margin-bottom: 1.5rem;
+}
+
+.card-socials a {
+  text-decoration: none;
+  margin: 0 0.5rem;
+  color: var(--link-color);
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.card-socials a:hover {
+  color: var(--link-hover);
+}
+
+.download-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #764ba2;
+  color: #fff;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.download-btn:hover {
+  background-color: #5a3a84;
+}
+
