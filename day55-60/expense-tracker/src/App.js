@@ -12,12 +12,19 @@ const App = () => {
     setTransactions([tx, ...transactions]);
   };
 
+  const handleDeleteTransaction = (id) => {
+    setTransactions(transactions.filter((tx) => tx.id !== id));
+  };
+
   return (
     <div className="container">
       <Header />
       <Balance transactions={transactions} />
       <IncomeExpenses transactions={transactions} />
-      <TransactionList transactions={transactions} />
+      <TransactionList
+        transactions={transactions}
+        onDelete={handleDeleteTransaction}
+      />
       <AddTransaction onAdd={handleAddTransaction} />
     </div>
   );
