@@ -21,7 +21,7 @@ const AddTransaction = ({ onAdd }) => {
   };
 
   return (
-    <div>
+    <div className="add-transaction">
       <h3>Add New Transaction</h3>
       <form onSubmit={handleSubmit}>
         <input

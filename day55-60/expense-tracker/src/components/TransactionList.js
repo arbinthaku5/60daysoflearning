@@ -1,8 +1,7 @@
-// TransactionList.js
 import React from 'react';
-import './TransactionList.css'; // optional, for styling
+import './TransactionList.css';
 
-const TransactionList = ({ transactions, onDelete }) => {
+const TransactionList = ({ transactions, onDelete, onEdit }) => {
   return (
     <div>
       <h3>Transaction History</h3>
@@ -12,11 +11,12 @@ const TransactionList = ({ transactions, onDelete }) => {
         <ul className="transaction-list">
           {transactions.map((tx) => (
             <li key={tx.id} className={tx.amount < 0 ? 'minus' : 'plus'}>
-              {tx.text} 
-              <span>
-                {tx.amount < 0 ? '-' : '+'}${Math.abs(tx.amount)}
-              </span>
-              <button onClick={() => onDelete(tx.id)} className="delete-btn">x</button>
+              <span>{tx.text}</span>
+              <span>${Math.abs(tx.amount)}</span>
+              <div className="btn-group">
+                <button onClick={() => onEdit(tx.id)} className="edit-btn">Edit</button>
+                <button onClick={() => onDelete(tx.id)} className="delete-btn">X</button>
+              </div>
             </li>
           ))}
         </ul>

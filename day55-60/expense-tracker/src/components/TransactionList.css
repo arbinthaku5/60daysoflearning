@@ -8,20 +8,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  padding: 10px;
-  margin: 8px 0;
-  border-right: 5px solid;
-  position: relative;
+  background: #fdfdfd;
+  border: 1px solid #ddd;
+  margin: 10px 0;
+  padding: 10px 15px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
 }
 
 .transaction-list li.plus {
-  border-color: #2ecc71;
+  border-right: 6px solid green;
 }
 
 .transaction-list li.minus {
-  border-color: #c0392b;
+  border-right: 6px solid red;
+}
+
+.transaction-list li:hover {
+  background: #f1f1f1;
 }
 
 .delete-btn {
@@ -37,4 +41,33 @@
 .delete-btn:hover {
   color: #e74c3c;
   transform: scale(1.1);
+}
+
+.edit-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-group {
+  display: flex;
+  gap: 5px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 5px 10px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.edit-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.delete-btn {
+  background-color: crimson;
+  color: white;
 }
