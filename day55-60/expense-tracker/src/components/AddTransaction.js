@@ -1,28 +1,43 @@
+import React, { useState, useEffect } from 'react';
 
-import React, { useState } from 'react';
-
-const AddTransaction = ({ onAdd }) => {
+const AddTransaction = ({ onAdd, onUpdate, editing }) => {
   const [text, setText] = useState('');
   const [amount, setAmount] = useState('');
+
+  // Populate form fields when editing a transaction
+  useEffect(() => {
+    if (editing) {
+      setText(editing.text);
+      setAmount(editing.amount.toString());
+    } else {
+      setText('');
+      setAmount('');
+    }
+  }, [editing]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!text || !amount) return;
 
-    const newTransaction = {
-      id: Date.now(),
+    const transactionData = {
+      id: editing ? editing.id : Date.now(),
       text,
       amount: parseFloat(amount),
     };
 
-    onAdd(newTransaction);
+    if (editing) {
+      onUpdate(transactionData);
+    } else {
+      onAdd(transactionData);
+    }
+
     setText('');
     setAmount('');
   };
 
   return (
     <div className="add-transaction">
-      <h3>Add New Transaction</h3>
+      <h3>{editing ? 'Edit Transaction' : 'Add New Transaction'}</h3>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -36,7 +51,9 @@ const AddTransaction = ({ onAdd }) => {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
-        <button type="submit">Add Transaction</button>
+        <button type="submit">
+          {editing ? 'Update Transaction' : 'Add Transaction'}
+        </button>
       </form>
     </div>
   );

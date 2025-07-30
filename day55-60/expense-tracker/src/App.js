@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import Header from './components/Header';
 import Balance from './components/Balance';
 import IncomeExpenses from './components/IncomeExpenses';
@@ -7,8 +8,16 @@ import AddTransaction from './components/AddTransaction';
 import './App.css';
 
 const App = () => {
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState(() => {
+    const saved = localStorage.getItem('transactions');
+    return saved ? JSON.parse(saved) : [];
+  });
   const [editing, setEditing] = useState(null); // id of editing transaction
+
+  useEffect(() => {
+  localStorage.setItem('transactions', JSON.stringify(transactions));
+  }, 
+  [transactions]);
 
   const handleAddTransaction = (tx) => {
     setTransactions([tx, ...transactions]);
@@ -34,11 +43,17 @@ const App = () => {
       <Header />
       <Balance transactions={transactions} />
       <IncomeExpenses transactions={transactions} />
+
+      <p className="transaction-count">
+        <h3>Total Transactions: {transactions.length}</h3>
+      </p>
+
       <TransactionList
         transactions={transactions}
         onDelete={handleDeleteTransaction}
         onEdit={handleEditTransaction}
       />
+
       <AddTransaction
         onAdd={handleAddTransaction}
         onUpdate={handleUpdateTransaction}

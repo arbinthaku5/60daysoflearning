@@ -37,7 +37,6 @@
   }
 }
 
-/* AddTransaction Section */
 .add-transaction {
   margin-top: 30px;
   padding: 20px;
@@ -88,4 +87,13 @@
 
 .add-transaction button:hover {
   background: #2568c5;
+}
+
+.transaction-count h3 {
+  text-align: left;
+  font-weight:200;
+  font-size: 20px;
+  margin: 15px 0;
+  color: #333;
+  font-weight: 600;
 }
